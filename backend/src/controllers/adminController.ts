@@ -7,14 +7,14 @@ interface CustomRequest extends Request {
     user?: IUserDocument;
 }
 
+import { getPagination } from '../utils/pagination.js';
+
 // @desc    Get all users (paginated)
 // @route   GET /api/admin/users
 // @access  Private/Admin
 export const getAllUsers = async (req: CustomRequest, res: Response) => {
     try {
-        const page = parseInt(req.query.page as string) || 1;
-        const limit = parseInt(req.query.limit as string) || 10;
-        const skip = (page - 1) * limit;
+        const { page, limit, skip } = getPagination(req);
 
         const totalUsers = await User.countDocuments({});
         const totalPages = Math.ceil(totalUsers / limit);

@@ -36,11 +36,11 @@ export const createNote = async (req: CustomRequest, res: Response) => {
 // @desc    Get all notes (paginated)
 // @route   GET /api/notes
 // @access  Private
+import { getPagination } from '../utils/pagination.js';
+
 export const getNotes = async (req: CustomRequest, res: Response) => {
     try {
-        const page = parseInt(req.query.page as string) || 1;
-        const limit = parseInt(req.query.limit as string) || 10;
-        const skip = (page - 1) * limit;
+        const { page, limit, skip } = getPagination(req);
 
         let query: any = {};
 

@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import noteRoutes from './routes/noteRoutes.js'; // Import note routes
+import aggregateRoutes from './routes/aggregateRoutes.js'; // Import aggregate routes
 
 dotenv.config();
 
@@ -16,5 +17,8 @@ app.get('/', (req, res) => {
 
 // Use Note Routes
 app.use('/api/notes', noteRoutes);
+
+// Use Aggregation Routes
+app.use('/api/aggregations', aggregateRoutes);
 
 export default app;

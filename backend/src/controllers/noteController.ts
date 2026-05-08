@@ -44,11 +44,10 @@ export const getNotes = async (req: CustomRequest, res: Response) => {
 
         let query: any = {};
 
-        // Users only see their own notes
-        if (req.user?.role === 'User') {
-            query.ownerId = req.user._id;
+        // Users only see their own notes, Admins see all
+        if (req.user?.role !== 'Admin') {
+            query.ownerId = req.user?._id;
         }
-        // Admins can see all notes (no additional query filter needed for role 'Admin')
 
         const totalNotes = await Note.countDocuments(query);
         const totalPages = Math.ceil(totalNotes / limit);

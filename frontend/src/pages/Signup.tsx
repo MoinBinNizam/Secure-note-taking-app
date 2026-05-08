@@ -25,36 +25,36 @@ const Signup: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <div className="w-full max-w-sm bg-white border border-gray-900 p-8">
-                <h1 className="text-3xl font-bold mb-6 text-gray-900 border-b border-gray-900 pb-4">Sign Up</h1>
-                {error && <p className="mb-4 p-2 bg-red-100 text-red-800 border border-red-800 text-sm">{error}</p>}
-                <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="min-h-screen flex items-center justify-center bg-slate-100 p-4">
+            <div className="w-full max-w-md bg-white border border-slate-200 shadow-xl p-8 rounded-2xl">
+                <h1 className="text-3xl font-bold mb-6 text-indigo-700 text-center">Sign Up</h1>
+                {error && <p className="mb-4 p-3 bg-red-50 text-red-700 border border-red-200 rounded-lg text-sm">{error}</p>}
+                <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
-                        <label className="block text-sm font-bold text-gray-900 uppercase">Email</label>
+                        <label className="block text-sm font-semibold text-slate-700 mb-1">Email</label>
                         <input
                             type="email"
-                            className="w-full mt-1 p-2 border border-gray-900 rounded-none focus:outline-none"
+                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-bold text-gray-900 uppercase">Password</label>
+                        <label className="block text-sm font-semibold text-slate-700 mb-1">Password</label>
                         <input
                             type="password"
-                            className="w-full mt-1 p-2 border border-gray-900 rounded-none focus:outline-none"
+                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-bold text-gray-900 uppercase">Interests (comma-separated)</label>
+                        <label className="block text-sm font-semibold text-slate-700 mb-1">Interests (comma-separated)</label>
                         <input
                             type="text"
-                            className="w-full mt-1 p-2 border border-gray-900 rounded-none focus:outline-none"
+                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             value={interests}
                             onChange={(e) => setInterests(e.target.value)}
                             placeholder="chess, reading, coding"
@@ -62,13 +62,13 @@ const Signup: React.FC = () => {
                     </div>
                     <button
                         type="submit"
-                        className="w-full mt-6 py-2 bg-gray-900 text-white font-bold uppercase hover:bg-gray-700 transition-colors"
+                        className="w-full mt-2 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-all shadow-md"
                     >
                         Create Account
                     </button>
                 </form>
-                <p className="mt-6 text-sm text-center">
-                    Already have an account? <Link to="/login" className="text-gray-900 underline font-bold">Login</Link>
+                <p className="mt-6 text-sm text-center text-slate-600">
+                    Already have an account? <Link to="/login" className="text-indigo-600 font-bold hover:underline">Login</Link>
                 </p>
             </div>
         </div>

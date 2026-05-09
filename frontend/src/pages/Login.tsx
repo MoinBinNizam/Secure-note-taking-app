@@ -24,25 +24,25 @@ const Login: React.FC = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
-            <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-2xl">
+            <div className="w-full max-w-md bg-emerald-50 p-8 rounded-3xl shadow-2xl border border-emerald-100">
                 <h1 className="text-3xl font-bold mb-8 text-slate-800 text-center">Login</h1>
-                {error && <p className="mb-4 p-3 bg-red-50 text-red-700 border border-red-200 rounded-xl text-sm">{error}</p>}
+                {error && <p className="mb-4 p-3 bg-red-50 text-red-700 border border-red-100 rounded-xl text-sm">{error}</p>}
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-semibold text-slate-500 mb-2">Email</label>
+                        <label className="block text-sm font-semibold text-emerald-800 mb-2">Email</label>
                         <input
                             type="email"
-                            className="w-full px-4 py-3 border border-slate-100 bg-slate-50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                            className="w-full px-4 py-3 border border-emerald-200 bg-white rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-semibold text-slate-500 mb-2">Password</label>
+                        <label className="block text-sm font-semibold text-emerald-800 mb-2">Password</label>
                         <input
                             type="password"
-                            className="w-full px-4 py-3 border border-slate-100 bg-slate-50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                            className="w-full px-4 py-3 border border-emerald-200 bg-white rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
@@ -50,13 +50,13 @@ const Login: React.FC = () => {
                     </div>
                     <button
                         type="submit"
-                        className="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all shadow-lg"
+                        className="w-full py-4 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-all shadow-lg"
                     >
                         Sign In
                     </button>
                 </form>
-                <p className="mt-8 text-sm text-center text-slate-500">
-                    Don't have an account? <Link to="/signup" className="text-indigo-600 font-bold hover:underline">Create Account</Link>
+                <p className="mt-8 text-sm text-center text-emerald-800">
+                    Don't have an account? <Link to="/signup" className="text-emerald-600 font-bold hover:underline">Create Account</Link>
                 </p>
             </div>
         </div>

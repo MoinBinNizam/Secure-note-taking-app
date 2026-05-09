@@ -7,6 +7,7 @@ import UserNotes from './pages/UserNotes';
 import AdminDashboard from './pages/AdminDashboard';
 import AggregationView from './pages/AggregationView';
 import ProtectedRoute from './components/ProtectedRoute';
+import Layout from './components/Layout';
 
 function App() {
     return (
@@ -27,9 +28,8 @@ function App() {
 
                 {/* Protected Routes */}
                 <Route path="/" element={<ProtectedRoute />}>
-                    <Route path="dashboard" element={<Dashboard />}>
-                        <Route index element={<Navigate to="notes" replace />} />
-                        <Route path="notes" element={<UserNotes />} />
+                    <Route element={<Layout><Routes><Route path="dashboard" element={<Dashboard />} /><Route path="admin" element={<AdminDashboard />} /><Route path="aggregations" element={<AggregationView />} /></Routes></Layout>}>
+                        <Route path="dashboard" element={<Dashboard />} />
                         <Route path="admin" element={<ProtectedRoute allowedRoles={['Admin']}><AdminDashboard /></ProtectedRoute>} />
                         <Route path="aggregations" element={<AggregationView />} />
                     </Route>

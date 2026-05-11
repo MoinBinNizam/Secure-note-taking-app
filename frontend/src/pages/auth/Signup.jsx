@@ -108,7 +108,7 @@ const Signup = () => {
                         <p className="text-sm text-slate-600">Already have an account? <Link to="/login" className="text-indigo-700 font-bold hover:underline">Log In</Link></p>
                     </div>
                 </div>
-            </main>
+            </motion.main>
         </div>
     );
 };

@@ -44,6 +44,7 @@ You can use these IDs in your commit messages (e.g., `feat: implement responsive
 * Design `Dashboard.tsx` and `UserNotes.tsx` with a mobile-first grid of note cards.
 * Implement "Create/Edit Note" modals or forms with rounded UI elements.
 * Add pagination controls (Next/Prev) to consume the backend's paginated REST API.
+* Add user name, logout option at the top. make sure the logout option is functional.
 
 
 

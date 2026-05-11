@@ -18,16 +18,10 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
         {/* Main application layout */}
-        <Route path="/dashboard" element={<Layout><Routes>
-          <Route index element={<Dashboard />} />
-          <Route path="notes" element={<UserNotes />} />
-        </Routes></Layout>} />
-        <Route path="/admin" element={<Layout><Routes>
-            <Route index element={<AdminDashboard />} />
-        </Routes></Layout>} />
-        <Route path="/aggregations" element={<Layout><Routes>
-            <Route index element={<AggregationView />} />
-        </Routes></Layout>} />
+        <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
+        <Route path="/dashboard/notes" element={<Layout><UserNotes /></Layout>} />
+        <Route path="/admin" element={<Layout><AdminDashboard /></Layout>} />
+        <Route path="/aggregations" element={<Layout><AggregationView /></Layout>} />
       </Routes>
     </Router>
   );

@@ -7,17 +7,30 @@ const Landing = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <header className="sticky top-0 bg-white/80 backdrop-blur-md border-b border-slate-200 z-50">
+      <header className="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-slate-200 z-50">
         <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="text-2xl font-bold text-indigo-700">SecureNotes</div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
-            <Link to="/dashboard" className="hover:text-indigo-600">Dashboard</Link>
-            <Link to="/admin" className="hover:text-indigo-600">Admin</Link>
-            <Link to="/aggregations" className="hover:text-indigo-600">Aggregations</Link>
+          <Link to="/" className="text-2xl font-bold text-indigo-700 tracking-tight">SecureNotes</Link>
+          
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-1">
+            {[
+              { path: '/dashboard', label: 'Dashboard' },
+              { path: '/admin', label: 'Admin' },
+              { path: '/aggregations', label: 'Aggregations' },
+            ].map((link) => (
+              <Link 
+                key={link.path} 
+                to={link.path} 
+                className="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-indigo-700 transition-all"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
-          <div className="flex items-center gap-4">
-            <Link to="/login" className="text-sm font-semibold text-slate-600 hover:text-indigo-600">Login</Link>
-            <Link to="/signup" className="text-sm font-semibold bg-indigo-600 text-white px-5 py-2.5 rounded-xl hover:bg-indigo-700 transition-all">Sign Up</Link>
+
+          <div className="flex items-center gap-3">
+            <Link to="/login" className="text-sm font-semibold text-slate-600 hover:text-indigo-600 px-4 py-2">Login</Link>
+            <Link to="/signup" className="text-sm font-semibold bg-indigo-600 text-white px-5 py-2.5 rounded-xl hover:bg-indigo-700 transition-all shadow-sm shadow-indigo-200">Sign Up</Link>
           </div>
         </nav>
       </header>

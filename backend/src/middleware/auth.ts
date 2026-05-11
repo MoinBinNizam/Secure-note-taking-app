@@ -22,10 +22,10 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
             token = req.headers.authorization.split(' ')[1];
 
             // Verify token
-            const decoded = jwt.verify(token, JWT_SECRET) as { id: string };
+            const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
 
             // Find user by ID and attach to request, excluding password
-            req.user = await User.findById(decoded.id).select('-password') as IUserDocument;
+            req.user = await User.findById(decoded.userId).select('-password') as IUserDocument;
 
             if (!req.user) {
                 res.status(401).json({ message: 'Not authorized, user not found' });

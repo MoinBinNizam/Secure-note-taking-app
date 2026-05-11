@@ -1,31 +1,64 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FileText, ShieldCheck, Clock, Plus, BarChart2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
+  const stats = [
+    { label: 'Total Notes', value: '12', icon: FileText, color: 'text-indigo-600' },
+    { label: 'Encrypted', value: '12', icon: ShieldCheck, color: 'text-emerald-600' },
+    { label: 'Recent', value: '3', icon: Clock, color: 'text-blue-600' },
+  ];
+
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="max-w-7xl mx-auto"
-    >
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-800">Dashboard</h1>
-        <p className="text-slate-600">Welcome to your secure note-taking workspace.</p>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-7xl mx-auto space-y-8">
+      {/* Welcome & Stats */}
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Dashboard</h1>
+          <p className="text-slate-600">Your secure workspace overview.</p>
+        </div>
+        <Link to="/dashboard/notes" className="flex items-center gap-2 bg-indigo-700 text-white px-6 py-3 rounded-2xl font-bold hover:bg-indigo-800 transition-all shadow-lg shadow-indigo-200">
+          <Plus size={20} /> Create New Note
+        </Link>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <motion.div 
-            key={i}
-            whileHover={{ y: -5 }}
-            className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200"
-          >
-            <h3 className="font-semibold text-slate-800 mb-2">My Secure Note {i}</h3>
-            <p className="text-slate-600 text-sm mb-4">Snippet of your encrypted content goes here...</p>
-            <span className="text-xs text-slate-400">Created: May 11, 2026</span>
-          </motion.div>
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {stats.map((stat, i) => (
+          <div key={i} className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4">
+            <div className={`p-4 bg-slate-50 rounded-2xl ${stat.color}`}>
+              <stat.icon size={24} />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-slate-500">{stat.label}</p>
+              <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
+            </div>
+          </div>
         ))}
-      </div>
+      </section>
+
+      {/* Recent Activity */}
+      <section className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <BarChart2 className="text-indigo-600" /> Recent Activity
+          </h3>
+        </div>
+        <div className="space-y-4">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+              <div className="flex items-center gap-4">
+                <div className="p-2 bg-white rounded-lg border border-slate-100"><FileText size={20} className="text-slate-400" /></div>
+                <div>
+                  <p className="font-semibold text-slate-800">Note {i} updated</p>
+                  <p className="text-xs text-slate-500">2 hours ago</p>
+                </div>
+              </div>
+              <Link to="/dashboard/notes" className="text-sm font-bold text-indigo-700 hover:underline">View</Link>
+            </div>
+          ))}
+        </div>
+      </section>
     </motion.div>
   );
 };

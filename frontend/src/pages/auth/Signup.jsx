@@ -64,22 +64,22 @@ const Signup = () => {
                         
                         <div className="flex flex-col gap-1.5">
                             <label className="text-sm font-semibold text-slate-700 ml-1">Full Name</label>
-                            <input className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="John Doe" required />
+                            <input className="decoration w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="John Doe" required />
                         </div>
 
                         <div className="flex flex-col gap-1.5">
                             <label className="text-sm font-semibold text-slate-700 ml-1">Email Address</label>
                             <div className="relative group">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-700 transition-colors" size={20} />
-                                <input className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="name@company.com" type="email" required />
+                                {/* <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-700 transition-colors" size={20} /> */}
+                                <input className="decoration w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="name@company.com" type="email" required />
                             </div>
                         </div>
 
                         <div className="flex flex-col gap-1.5">
                             <label className="text-sm font-semibold text-slate-700 ml-1">Password</label>
                             <div className="relative group">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-700 transition-colors" size={20} />
-                                <input className="w-full pl-12 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} placeholder="••••••••••••" type={showPassword ? 'text' : 'password'} required />
+                                {/* <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-700 transition-colors" size={20} /> */}
+                                <input className="decoration w-full pl-12 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} placeholder="••••••••••••" type={showPassword ? 'text' : 'password'} required />
                                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-indigo-700">
                                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                 </button>
@@ -95,11 +95,11 @@ const Signup = () => {
                                         <X size={14} className="cursor-pointer hover:text-indigo-200" onClick={() => removeInterest(tag)} />
                                     </span>
                                 ))}
-                                <input className="flex-1 bg-transparent border-none focus:ring-0 p-1 text-sm min-w-[80px]" value={interest} onChange={e => setInterest(e.target.value)} onKeyDown={handleAddInterest} placeholder="Add tag..." type="text" />
+                                <input className="decoration flex-1 bg-transparent border-none focus:ring-0 p-1 text-sm min-w-[80px]" value={interest} onChange={e => setInterest(e.target.value)} onKeyDown={handleAddInterest} placeholder="Add tag..." type="text" />
                             </div>
                         </div>
 
-                        <button type="submit" className="w-full bg-indigo-700 text-white py-3.5 rounded-2xl font-bold hover:bg-indigo-800 transition-all flex items-center justify-center gap-2">
+                        <button type="submit" className="signup-submit w-full bg-indigo-700 text-white py-3.5 rounded-2xl font-bold hover:bg-indigo-800 transition-all flex items-center justify-center gap-2">
                             Create Account <ArrowRight size={20} />
                         </button>
                     </form>

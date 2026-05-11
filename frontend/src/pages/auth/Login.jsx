@@ -43,10 +43,10 @@ const Login = () => {
                         {error && <div className="p-3 rounded-xl bg-red-50 text-red-600 text-sm font-semibold">{error}</div>}
                         
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-sm font-semibold text-slate-700 ml-1">Email Address</label>
+                            <label className="text-sm font-semibold text-slate-700">Email Address</label>
                             <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={22} />
-                                <input className="w-full pl-14 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" type="email" required />
+                                {/* <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={22} /> */}
+                                <input className="decoration w-full pl-14 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" type="email" required />
                             </div>
                         </div>
 
@@ -56,15 +56,15 @@ const Login = () => {
                                 <a href="#" className="text-xs font-bold text-indigo-700 hover:underline">Forgot?</a>
                             </div>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={22} />
-                                <input className="w-full pl-14 pr-14 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••••••" type={showPassword ? 'text' : 'password'} required />
+                                {/* <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={22} /> */}
+                                <input className="decoration w-full pl-14 pr-14 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••••••" type={showPassword ? 'text' : 'password'} required />
                                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-indigo-700">
                                     {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
                                 </button>
                             </div>
                         </div>
 
-                        <button type="submit" className="w-full bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all flex items-center justify-center gap-2 text-base">
+                        <button type="submit" className="submit w-full bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all flex items-center justify-center gap-4text-base">
                             Sign In <ArrowRight size={20} />
                         </button>
                     </form>

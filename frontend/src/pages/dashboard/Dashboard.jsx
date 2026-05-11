@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, ShieldCheck, Clock, Plus, BarChart2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { FileText, ShieldCheck, Clock, Plus, BarChart2, LogOut } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({ totalNotes: 0, recentNotes: [] });
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,9 +42,14 @@ const Dashboard = () => {
           <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Dashboard</h1>
           <p className="text-slate-600">Your secure workspace overview.</p>
         </div>
-        <Link to="/dashboard/notes" className="flex items-center gap-2 bg-indigo-700 text-white px-6 py-3 rounded-2xl font-bold hover:bg-indigo-800 transition-all shadow-lg shadow-indigo-200">
-          <Plus size={20} /> Create New Note
-        </Link>
+        <div className="flex items-center gap-4">
+            <button onClick={handleLogout} className="flex items-center gap-2 text-slate-500 font-bold hover:text-red-600 transition-all">
+                <LogOut size={20} /> Logout
+            </button>
+            <Link to="/dashboard/notes" className="flex items-center gap-2 bg-indigo-700 text-white px-6 py-3 rounded-2xl font-bold hover:bg-indigo-800 transition-all shadow-lg shadow-indigo-200">
+            <Plus size={20} /> Create New Note
+            </Link>
+        </div>
       </header>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">

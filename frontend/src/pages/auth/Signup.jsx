@@ -60,13 +60,13 @@ const Signup = () => {
 
                 <div className="bg-white rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-100">
                     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                        {error && <div className="p-3 rounded-xl bg-red-50 text-red-600 text-sm font-semibold">{error}</div>}
+                        {error && (
+                            <div className="p-4 rounded-2xl bg-red-50 border border-red-100 flex items-center gap-3 animate-shake">
+                                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                                <p className="text-red-600 text-sm font-bold tracking-tight">{error}</p>
+                            </div>
+                        )}
                         
-                        <div className="flex flex-col gap-1.5">
-                            <label className="text-sm font-semibold text-slate-700 ml-1">Full Name</label>
-                            <input className="decoration w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="John Doe" required />
-                        </div>
-
                         <div className="flex flex-col gap-1.5">
                             <label className="text-sm font-semibold text-slate-700 ml-1">Email Address</label>
                             <div className="relative group">

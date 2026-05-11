@@ -1,5 +1,5 @@
 import { Schema, model, Document, Model } from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 // Define the base interface for User document properties
 interface IUser {
@@ -59,17 +59,15 @@ const UserSchema = new Schema<IUserDocument, IUserModel>({
 });
 
 // Explicit Indexing
-UserSchema.index({ email: 1 }, { unique: true }); // Unique index for email
 UserSchema.index({ interests: 1 }); // Multikey index for interests (Mongoose handles multikey for array fields automatically)
 
 // Pre-save hook to hash password
-UserSchema.pre<IUserDocument>('save', async function (next) {
+UserSchema.pre<IUserDocument>('save', async function () {
     if (!this.isModified('password')) {
-        return next();
+        return;
     }
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
-    next();
 });
 
 // Instance method to compare password

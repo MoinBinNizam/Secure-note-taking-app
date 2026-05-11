@@ -40,5 +40,9 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "allowImportingTsExtensions": true
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
   }
 }

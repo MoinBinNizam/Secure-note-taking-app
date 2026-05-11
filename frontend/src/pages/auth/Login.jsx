@@ -40,12 +40,17 @@ const Login = () => {
 
                 <div className="bg-white rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-100">
                     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                        {error && <div className="p-3 rounded-xl bg-red-50 text-red-600 text-sm font-semibold">{error}</div>}
+                        {error && (
+                            <div className="p-4 rounded-2xl bg-red-50 border border-red-100 flex items-center gap-3 animate-shake">
+                                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                                <p className="text-red-600 text-sm font-bold tracking-tight">{error}</p>
+                            </div>
+                        )}
                         
                         <div className="flex flex-col gap-1.5">
                             <label className="text-sm font-semibold text-slate-700">Email Address</label>
-                            <div className="relative">
-                                {/* <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={22} /> */}
+                            <div className="relative group">
+                                {/* <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-700 transition-colors" size={22} /> */}
                                 <input className="decoration w-full pl-14 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" type="email" required />
                             </div>
                         </div>
@@ -55,8 +60,8 @@ const Login = () => {
                                 <label className="text-sm font-semibold text-slate-700">Password</label>
                                 <a href="#" className="text-xs font-bold text-indigo-700 hover:underline">Forgot?</a>
                             </div>
-                            <div className="relative">
-                                {/* <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={22} /> */}
+                            <div className="relative group">
+                                {/* <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-700 transition-colors" size={22} /> */}
                                 <input className="decoration w-full pl-14 pr-14 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••••••" type={showPassword ? 'text' : 'password'} required />
                                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-indigo-700">
                                     {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}

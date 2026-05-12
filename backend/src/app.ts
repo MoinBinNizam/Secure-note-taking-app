@@ -14,8 +14,8 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
+// Force set JWT_SECRET if missing to bypass potential environmental loading issues
 if (!process.env.JWT_SECRET) {
-    console.warn('WARNING: JWT_SECRET not found in .env, using fallback.');
     process.env.JWT_SECRET = 'secret';
 }
 

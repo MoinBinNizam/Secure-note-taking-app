@@ -74,22 +74,33 @@ const UserNotes = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {notes.map((note) => (
-          <motion.div key={note._id} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 group flex flex-col">
-            <h3 className="font-bold text-slate-800 text-lg mb-2">{note.title}</h3>
-            <div 
-              className="text-slate-600 text-sm mb-6 break-words" 
-              dangerouslySetInnerHTML={{ __html: note.content }} 
-            />
-            <div className="flex justify-between items-center text-xs text-slate-400 mt-auto">
-              <span>{new Date(note.createdAt).toLocaleDateString()}</span>
-              <div className="flex gap-2">
-                <button onClick={() => { setModal({ isOpen: true, note }); setFormData({ title: note.title, content: note.content }); }} className="hover:text-indigo-600"><Edit size={16} /></button>
-                <button onClick={() => deleteNote(note._id)} className="hover:text-red-600"><Trash2 size={16} /></button>
-              </div>
+        {loading ? (
+           <div className="col-span-full text-center py-20 text-slate-500 font-semibold">Loading your notes...</div>
+        ) : notes.length > 0 ? (
+            notes.map((note) => (
+              <motion.div key={note._id} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 group flex flex-col">
+                <h3 className="font-bold text-slate-800 text-lg mb-2">{note.title}</h3>
+                <div 
+                  className="text-slate-600 text-sm mb-6 break-words" 
+                  dangerouslySetInnerHTML={{ __html: note.content }} 
+                />
+                <div className="flex justify-between items-center text-xs text-slate-400 mt-auto">
+                  <span>{new Date(note.createdAt).toLocaleDateString()}</span>
+                  <div className="flex gap-2">
+                    <button onClick={() => { setModal({ isOpen: true, note }); setFormData({ title: note.title, content: note.content }); }} className="hover:text-indigo-600"><Edit size={16} /></button>
+                    <button onClick={() => deleteNote(note._id)} className="hover:text-red-600"><Trash2 size={16} /></button>
+                  </div>
+                </div>
+              </motion.div>
+            ))
+        ) : (
+            <div className="col-span-full flex flex-col items-center justify-center py-20 bg-white rounded-3xl border border-dashed border-slate-300">
+                <p className="text-slate-500 font-medium mb-4">No notes found. Start by creating one!</p>
+                <button onClick={() => setModal({ isOpen: true, note: null })} className="bg-indigo-700 text-white px-6 py-3 rounded-2xl font-bold hover:bg-indigo-800 transition-all">
+                    Create Your First Note
+                </button>
             </div>
-          </motion.div>
-        ))}
+        )}
       </div>
 
       <AnimatePresence>

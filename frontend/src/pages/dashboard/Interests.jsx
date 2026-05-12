@@ -11,6 +11,7 @@ const Interests = () => {
         const fetchProfile = async () => {
             try {
                 const res = await api.get('/auth/me');
+                console.log('DEBUG - User profile fetched for interests:', res.data);
                 setInterests(res.data.interests || []);
             } catch (err) {
                 console.error('Failed to fetch profile:', err);

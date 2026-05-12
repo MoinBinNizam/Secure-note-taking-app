@@ -51,7 +51,7 @@ const UserNotes = () => {
       }
       setModal({ isOpen: false, note: null });
       setFormData({ title: '', content: '' });
-      fetchNotes();
+      await fetchNotes();
     } catch (err) {
       console.error('Failed to save note:', err);
     }
@@ -106,26 +106,26 @@ const UserNotes = () => {
       <AnimatePresence>
         {modal.isOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-white p-8 rounded-3xl w-full max-w-lg shadow-xl">
+            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-white p-8 rounded-3xl w-full max-w-4xl shadow-xl">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-bold text-slate-800">{modal.note ? 'Edit Note' : 'Create New Note'}</h3>
                 <button type="button" onClick={() => setModal({ isOpen: false, note: null })}><X size={20} /></button>
               </div>
               <div className="space-y-4">
-                <input required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Title" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} />
+                <input required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Note Title" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} />
                 
-                <div className="border border-slate-200 rounded-2xl overflow-hidden">
+                <div className="border border-slate-200 rounded-2xl overflow-hidden min-h-[400px] flex flex-col">
                     <div className="flex bg-slate-100 p-2 gap-1 border-b border-slate-200">
-                        <button type="button" onClick={() => formatText('bold')} className="p-1 hover:bg-slate-200 rounded"><Bold size={16} /></button>
-                        <button type="button" onClick={() => formatText('italic')} className="p-1 hover:bg-slate-200 rounded"><Italic size={16} /></button>
-                        <button type="button" onClick={() => formatText('underline')} className="p-1 hover:bg-slate-200 rounded"><Underline size={16} /></button>
-                        <button type="button" onClick={() => formatText('insertUnorderedList')} className="p-1 hover:bg-slate-200 rounded"><List size={16} /></button>
-                        <button type="button" onClick={() => formatText('insertOrderedList')} className="p-1 hover:bg-slate-200 rounded"><ListOrdered size={16} /></button>
+                        <button type="button" onClick={() => formatText('bold')} className="p-2 hover:bg-slate-200 rounded"><Bold size={18} /></button>
+                        <button type="button" onClick={() => formatText('italic')} className="p-2 hover:bg-slate-200 rounded"><Italic size={18} /></button>
+                        <button type="button" onClick={() => formatText('underline')} className="p-2 hover:bg-slate-200 rounded"><Underline size={18} /></button>
+                        <button type="button" onClick={() => formatText('insertUnorderedList')} className="p-2 hover:bg-slate-200 rounded"><List size={18} /></button>
+                        <button type="button" onClick={() => formatText('insertOrderedList')} className="p-2 hover:bg-slate-200 rounded"><ListOrdered size={18} /></button>
                     </div>
                     <div 
                         ref={contentRef} 
                         contentEditable 
-                        className="w-full px-4 py-3 bg-slate-50 h-48 outline-none overflow-y-auto cursor-text border border-transparent focus:border-indigo-300"
+                        className="w-full px-4 py-4 bg-slate-50 flex-grow h-[300px] outline-none overflow-y-auto cursor-text border border-transparent focus:border-indigo-300"
                     />
                 </div>
               </div>

@@ -8,6 +8,8 @@ import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 
+console.log('ENV CHECK - JWT_SECRET:', process.env.JWT_SECRET);
+
 const app = express();
 
 app.use(cors());

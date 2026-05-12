@@ -33,6 +33,12 @@ const UserNotes = () => {
     fetchNotes();
   }, []);
 
+  useEffect(() => {
+    if (modal.isOpen && contentRef.current) {
+        contentRef.current.innerHTML = modal.note ? modal.note.content : '';
+    }
+  }, [modal.isOpen, modal.note]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const content = contentRef.current.innerHTML;

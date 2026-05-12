@@ -37,10 +37,10 @@ const Settings = () => {
     };
 
     const saveInterests = async () => {
+        console.log('DEBUG - Interests state at click:', interests);
         try {
             setLoading(true);
-            console.log('SAVING INTERESTS:', interests);
-            await api.patch('/auth/interests', { interests: interests });
+            await api.patch('/auth/interests', { interests });
             alert('Interests updated!');
         } catch (err) {
             console.error('Failed to save interests:', err);

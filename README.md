@@ -52,7 +52,7 @@ Create a `.env` file in the `backend/` directory:
 ```env
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/note-taking
-JWT_SECRET=your_secret_key_here
+JWT_SECRET=secret
 ```
 
 ### Running the Application

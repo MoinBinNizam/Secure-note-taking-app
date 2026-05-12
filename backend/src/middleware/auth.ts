@@ -11,7 +11,7 @@ declare global {
     }
 }
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // Fallback for development, use .env in production
+const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
 export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
     let token;

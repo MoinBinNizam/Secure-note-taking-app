@@ -68,9 +68,12 @@ const UserNotes = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {notes.map((note) => (
-          <motion.div key={note._id} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 group">
+          <motion.div key={note._id} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 group flex flex-col">
             <h3 className="font-bold text-slate-800 text-lg mb-2">{note.title}</h3>
-            <div className="text-slate-600 text-sm mb-6 prose max-w-none" dangerouslySetInnerHTML={{ __html: note.content }} />
+            <div 
+              className="text-slate-600 text-sm mb-6 break-words" 
+              dangerouslySetInnerHTML={{ __html: note.content }} 
+            />
             <div className="flex justify-between items-center text-xs text-slate-400 mt-auto">
               <span>{new Date(note.createdAt).toLocaleDateString()}</span>
               <div className="flex gap-2">
@@ -107,7 +110,7 @@ const UserNotes = () => {
               <button onClick={handleSubmit} className="w-full mt-6 bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all">Save Note</button>
             </motion.div>
           </motion.div>
-        ))}
+        )}
       </AnimatePresence>
     </div>
   );

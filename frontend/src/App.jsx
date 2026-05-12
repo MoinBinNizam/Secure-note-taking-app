@@ -10,6 +10,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminUserNotes from './pages/admin/AdminUserNotes';
 import AggregationView from './pages/aggregations/AggregationView';
 import Settings from './pages/dashboard/Settings';
+import Interests from './pages/dashboard/Interests';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         {/* Main application layout */}
         <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
         <Route path="/dashboard/notes" element={<Layout><UserNotes /></Layout>} />
+        <Route path="/dashboard/interests" element={<Layout><Interests /></Layout>} />
         <Route path="/dashboard/settings" element={<Layout><Settings /></Layout>} />
         <Route path="/admin" element={<Layout><AdminDashboard /></Layout>} />
         <Route path="/admin/user-notes/:userId" element={<Layout><AdminUserNotes /></Layout>} />

@@ -20,7 +20,8 @@ const UserNotes = () => {
     try {
       setLoading(true);
       const res = await api.get(`/notes?page=${page}&limit=6`);
-      setNotes(res.data.data);
+      console.log('API RESPONSE (Notes):', res.data);
+      setNotes(res.data.data || []);
       setPagination({ currentPage: res.data.currentPage, totalPages: res.data.totalPages });
     } catch (err) {
       console.error('Failed to fetch notes:', err);

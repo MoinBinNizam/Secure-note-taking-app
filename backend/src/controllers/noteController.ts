@@ -41,25 +41,25 @@ import { getPagination } from '../utils/pagination.js';
 export const getNotes = async (req: CustomRequest, res: Response) => {
     try {
         const { page, limit, skip } = getPagination(req);
+        const { ownerId } = req.query;
 
         let query: any = {};
 
-        // Users only see their own notes, Admins see all
-        console.log('CURRENT USER:', req.user?._id, 'ROLE:', req.user?.role);
-        if (req.user?.role !== 'Admin') {
+        // Admins can filter by specific ownerId, otherwise users only see their own notes
+        if (req.user?.role === 'Admin' && ownerId) {
+            query.ownerId = ownerId;
+        } else if (req.user?.role !== 'Admin') {
             query.ownerId = req.user?._id;
         }
 
-        console.log('NOTE QUERY:', query);
         const totalNotes = await Note.countDocuments(query);
-        console.log('TOTAL NOTES FOUND:', totalNotes);
         const totalPages = Math.ceil(totalNotes / limit);
 
         const notes = await Note.find(query)
-            .sort({ createdAt: -1 }) // Sort by creation date descending
+            .sort({ createdAt: -1 })
             .skip(skip)
             .limit(limit)
-            .populate('ownerId', 'email'); // Populate owner details, e.g., email
+            .populate('ownerId', 'email');
 
         res.status(200).json({
             data: notes,

@@ -14,18 +14,21 @@ declare global {
 export const roleCheck = (allowedRoles: Array<'User' | 'Admin'>) => {
     return (req: Request, res: Response, next: NextFunction) => {
         if (!req.user) {
-            return res.status(401).json({ message: 'Not authorized, no user found in request' });
+            return res.status(401).json({ message: 'Unauthorized: User not authenticated' });
         }
 
-        // Check if the user's role is included in the allowed roles
-        // Admin inherently has all 'User' capabilities, but for explicit checks,
-        // we need to ensure the allowedRoles array is inclusive.
-        const userRole: 'User' | 'Admin' = req.user.role;
+        const userRole = req.user.role;
 
-        if (!allowedRoles.includes(userRole)) {
-            return res.status(403).json({ message: 'Forbidden, insufficient role' });
+        // Admins automatically have access to everything
+        if (userRole === 'Admin') {
+            return next();
         }
-        
-        next();
+
+        // Check if the user's role is in the allowed list
+        if (allowedRoles.includes(userRole)) {
+            return next();
+        }
+
+        return res.status(403).json({ message: 'Forbidden: Insufficient permissions' });
     };
 };

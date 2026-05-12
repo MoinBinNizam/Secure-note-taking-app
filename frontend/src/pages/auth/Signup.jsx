@@ -29,16 +29,18 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
+        console.log('DEBUG - Signup Interests being sent:', interests);
         try {
             // Updated registration call to match potential backend expectation
             await api.post('/auth/register', { 
                 email: formData.email, 
                 password: formData.password, 
-                interests,
+                interests: interests, // Ensure property name is exactly 'interests'
                 name: formData.name 
             });
             navigate('/login');
         } catch (err) {
+            console.error('Registration error details:', err.response?.data);
             setError(err.response?.data?.message || 'Registration failed. Please check your inputs.');
         }
     };

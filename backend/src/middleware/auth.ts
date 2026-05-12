@@ -11,7 +11,10 @@ declare global {
     }
 }
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import User, { IUserDocument } from '../models/User.js';
+import { SHARED_JWT_SECRET } from '../config/secret.js';
 
 export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
     let token;
@@ -19,7 +22,7 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try {
             token = req.headers.authorization.split(' ')[1];
-            const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
+            const decoded = jwt.verify(token, SHARED_JWT_SECRET) as { userId: string };
             req.user = await User.findById(decoded.userId).select('-password') as IUserDocument;
 
             if (!req.user) {

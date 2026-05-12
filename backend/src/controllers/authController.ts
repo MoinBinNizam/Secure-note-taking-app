@@ -8,11 +8,13 @@ interface CustomRequest extends Request {
     user?: IUserDocument;
 }
 
-const getSecret = () => {
-    const secret = process.env.JWT_SECRET;
-    if (!secret) throw new Error('JWT_SECRET is not defined');
-    return secret;
-};
+import jwt from 'jsonwebtoken';
+import { IUserDocument } from '../models/User.js';
+import { SHARED_JWT_SECRET } from '../config/secret.js';
+
+interface CustomRequest extends Request {
+    user?: IUserDocument;
+}
 
 export const register = async (req: Request, res: Response) => {
     try {
@@ -25,7 +27,7 @@ export const register = async (req: Request, res: Response) => {
 
         const user = await User.create({ email, password, interests });
         
-        const token = jwt.sign({ userId: user._id.toString() }, getSecret(), { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id.toString() }, SHARED_JWT_SECRET, { expiresIn: '1h' });
 
         res.status(201).json({ token, user: { email: user.email, role: user.role } });
     } catch (err: any) {
@@ -33,6 +35,7 @@ export const register = async (req: Request, res: Response) => {
         res.status(500).json({ message: err.message || 'Server error' });
     }
 };
+
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
@@ -48,10 +51,7 @@ export const login = async (req: Request, res: Response) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
-        const secret = process.env.JWT_SECRET;
-        if (!secret) throw new Error('JWT_SECRET is not defined');
-
-        const token = jwt.sign({ userId: user._id }, secret, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, SHARED_JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, user: { email: user.email, role: user.role } });
     } catch (err: any) {
         console.error('Login error:', err);

@@ -1,0 +1,1 @@
+export const SHARED_JWT_SECRET = 'a_very_secure_secret_key_12345';

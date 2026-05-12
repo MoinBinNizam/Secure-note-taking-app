@@ -45,11 +45,14 @@ export const getNotes = async (req: CustomRequest, res: Response) => {
         let query: any = {};
 
         // Users only see their own notes, Admins see all
+        console.log('CURRENT USER:', req.user?._id, 'ROLE:', req.user?.role);
         if (req.user?.role !== 'Admin') {
             query.ownerId = req.user?._id;
         }
 
+        console.log('NOTE QUERY:', query);
         const totalNotes = await Note.countDocuments(query);
+        console.log('TOTAL NOTES FOUND:', totalNotes);
         const totalPages = Math.ceil(totalNotes / limit);
 
         const notes = await Note.find(query)

@@ -43,9 +43,6 @@ const Dashboard = () => {
           <p className="text-slate-600">Your secure workspace overview.</p>
         </div>
         <div className="flex items-center gap-4">
-            <button onClick={handleLogout} className="flex items-center gap-2 text-slate-500 font-bold hover:text-red-600 transition-all">
-                <LogOut size={20} /> Logout
-            </button>
             <Link to="/dashboard/notes" className="flex items-center gap-2 bg-indigo-700 text-white px-6 py-3 rounded-2xl font-bold hover:bg-indigo-800 transition-all shadow-lg shadow-indigo-200">
             <Plus size={20} /> Create New Note
             </Link>

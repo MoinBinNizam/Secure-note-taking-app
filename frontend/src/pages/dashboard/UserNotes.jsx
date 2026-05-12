@@ -65,10 +65,10 @@ const UserNotes = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6">
-      <div className="flex justify-between items-center mb-8 pt-[30px]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
+      <div className="sticky top-0 z-40 bg-slate-50 py-6 flex justify-between items-center mb-4">
         <h2 className="text-3xl font-bold text-slate-800">My Notes</h2>
-        <button onClick={() => setModal({ isOpen: true, note: null })} className="hidden md:flex items-center gap-2 bg-indigo-700 text-white px-5 py-2.5 rounded-2xl font-bold hover:bg-indigo-800 transition-all shadow-md">
+        <button onClick={() => setModal({ isOpen: true, note: null })} className="flex items-center gap-2 bg-indigo-700 text-white px-5 py-2.5 rounded-2xl font-bold hover:bg-indigo-800 transition-all shadow-md">
           <Plus size={20} /> New Note
         </button>
       </div>

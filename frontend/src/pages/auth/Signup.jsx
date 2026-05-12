@@ -53,8 +53,10 @@ const Signup = () => {
                 <header className="text-center">
                     <div className="w-16 h-16 bg-indigo-700 rounded-3xl flex items-center justify-center shadow-lg shadow-indigo-600/20 mx-auto mb-4">
                         <Shield className="text-white h-8 w-8" />
+                    <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">SecureNotes</h1>
+
                     </div>
-                    <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Create Account</h1>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Create Account</h2>
                     <p className="text-slate-600 mt-2 text-sm sm:text-base">Join SecureNotes and protect your ideas.</p>
                 </header>
 
@@ -91,7 +93,7 @@ const Signup = () => {
                                         <X size={14} className="cursor-pointer hover:text-indigo-200" onClick={() => removeInterest(tag)} />
                                     </span>
                                 ))}
-                                <input className="flex-1 bg-transparent border-none focus:ring-0 p-1 text-sm min-w-[80px]" value={interest} onChange={e => setInterest(e.target.value)} onKeyDown={handleAddInterest} placeholder="Add tag..." type="text" />
+                                <input className="flex-1 bg-transparent border-none focus:ring-0 p-5 text-sm min-w-[80px]" value={interest} onChange={e => setInterest(e.target.value)} onKeyDown={handleAddInterest} placeholder="Add tag..." type="text" />
                             </div>
                         </div>
 

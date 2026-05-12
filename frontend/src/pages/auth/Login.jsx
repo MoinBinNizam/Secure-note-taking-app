@@ -25,7 +25,7 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center p-6 bg-slate-50">
-            <motion.main 
+            <motion.main
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="w-full max-w-sm flex flex-col gap-6"
@@ -33,8 +33,11 @@ const Login = () => {
                 <header className="text-center">
                     <div className="w-16 h-16 bg-indigo-700 rounded-3xl flex items-center justify-center shadow-lg shadow-indigo-600/20 mx-auto mb-4">
                         <Shield className="text-white h-8 w-8" />
+                        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">SecureNotes</h1>
+
                     </div>
-                    <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Welcome Back</h1>
+                    <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Welcome Back</h2>
+                    <h3 className="text-3xl font-bold text-slate-900 tracking-tight">Login</h3>
                     <p className="text-slate-600 mt-2">Access your secure workspace.</p>
                 </header>
 
@@ -46,7 +49,7 @@ const Login = () => {
                                 <p className="text-red-600 text-sm font-bold tracking-tight">{error}</p>
                             </div>
                         )}
-                        
+
                         <div className="flex flex-col gap-1.5">
                             <label className="text-sm font-semibold text-slate-700">Email Address</label>
                             <input className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" type="email" required />
@@ -65,16 +68,16 @@ const Login = () => {
                             </div>
                         </div>
 
-                        <button type="submit" className="w-full bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all flex items-center justify-center gap-2 text-base">
+                        <button type="submit" className="w-full bg-green-200 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all flex items-center justify-center gap-2 text-base">
                             Sign In <ArrowRight size={20} />
                         </button>
                     </form>
-                    
+
                     <div className="mt-6 pt-6 border-t border-slate-100 flex flex-col items-center gap-4">
                         <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">OR CONTINUE WITH</div>
                         <div className="flex w-full gap-3">
-                            <button className="flex-1 flex items-center justify-center gap-2 py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all font-semibold text-sm">Google</button>
-                            <button className="flex-1 flex items-center justify-center gap-2 py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all font-semibold text-sm">Facebook</button>
+                            {/* <button className="flex-1 flex items-center justify-center gap-2 py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all font-semibold text-sm">Google</button>
+                            <button className="flex-1 flex items-center justify-center gap-2 py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all font-semibold text-sm">Facebook</button> */}
                         </div>
                         <p className="text-sm text-slate-600 mt-2">Don't have an account? <Link to="/signup" className="text-indigo-700 font-bold hover:underline">Create a vault</Link></p>
                     </div>

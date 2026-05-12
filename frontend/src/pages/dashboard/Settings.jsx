@@ -24,8 +24,9 @@ const Settings = () => {
     const handleAddInterest = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            if (interest.trim() && !interests.includes(interest.trim())) {
-                setInterests([...interests, interest.trim()]);
+            const newInterest = interest.trim();
+            if (newInterest && !interests.includes(newInterest)) {
+                setInterests((prev) => [...prev, newInterest]);
                 setInterest('');
             }
         }

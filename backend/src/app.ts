@@ -35,7 +35,6 @@ app.use(cors({
     optionsSuccessStatus: 200
 }));
 
-app.options('*', cors()); // Preflight request handling
 app.use(express.json());
 
 app.get('/', (req, res) => {

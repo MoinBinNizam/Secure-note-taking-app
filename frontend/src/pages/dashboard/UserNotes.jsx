@@ -86,10 +86,16 @@ const UserNotes = () => {
                 <button type="button" onClick={() => setModal({ isOpen: false, note: null })}><X size={20} /></button>
               </div>
               <div className="space-y-4">
-                <input required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Title" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} />
-                <textarea required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl h-32" placeholder="Write something..." value={formData.content} onChange={e => setFormData({...formData, content: e.target.value})} />
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1 ml-1">Title</label>
+                  <input required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-700/20 outline-none transition-all" placeholder="Enter note title..." value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1 ml-1">Content</label>
+                  <textarea required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl h-48 focus:ring-2 focus:ring-indigo-700/20 outline-none transition-all" placeholder="Write your thoughts here..." value={formData.content} onChange={e => setFormData({...formData, content: e.target.value})} />
+                </div>
               </div>
-              <button type="submit" className="w-full mt-6 bg-indigo-700 text-white py-3 rounded-2xl font-bold hover:bg-indigo-800">Save Note</button>
+              <button type="submit" className="w-full mt-6 bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all">Save Note</button>
             </motion.form>
           </motion.div>
         )}

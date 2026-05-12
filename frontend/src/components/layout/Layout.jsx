@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, ShieldCheck, Database, LogOut, Menu, X } from 'lucide-react';
-
-import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, ShieldCheck, Database, LogOut, Menu, X } from 'lucide-react';
 import { jwtDecode } from 'jwt-decode';
@@ -12,11 +8,6 @@ const Sidebar = ({ isOpen, toggle }) => {
     let isAdmin = false;
     try {
         if (token) {
-            const decoded = jwtDecode(token);
-            // Assuming the backend includes 'role' in the JWT payload.
-            // If not, we might need to fetch user profile data.
-            // Based on current backend implementation, JWT only has userId.
-            // I'll add a check for a stored role or verify if we need to store it.
             isAdmin = localStorage.getItem('role') === 'Admin';
         }
     } catch (e) { console.error(e); }

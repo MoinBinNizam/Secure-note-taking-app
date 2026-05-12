@@ -15,6 +15,7 @@ export const register = async (req: Request, res: Response) => {
         const user = await User.create({ email, password, interests });
         
         const secret = process.env.JWT_SECRET || 'secret';
+        console.log('REGISTER SECRET:', secret);
         const token = jwt.sign({ userId: user._id.toString() }, secret, { expiresIn: '1h' });
 
         res.status(201).json({ token, user: { email: user.email, role: user.role } });
@@ -35,6 +36,7 @@ export const login = async (req: Request, res: Response) => {
         }
         
         const secret = process.env.JWT_SECRET || 'secret';
+        console.log('LOGIN SECRET:', secret);
         const token = jwt.sign({ userId: user._id }, secret, { expiresIn: '1h' });
         res.json({ token, user: { email: user.email, role: user.role } });
     } catch (err: any) {

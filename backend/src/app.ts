@@ -14,12 +14,18 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-console.log('CWD:', process.cwd());
-console.log('ENV CHECK - JWT_SECRET:', process.env.JWT_SECRET);
+if (!process.env.JWT_SECRET) {
+    console.warn('WARNING: JWT_SECRET not found in .env, using fallback.');
+    process.env.JWT_SECRET = 'secret';
+}
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => {

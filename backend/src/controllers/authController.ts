@@ -2,6 +2,11 @@ import { Request, Response } from 'express';
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { IUserDocument } from '../models/User.js';
+
+interface CustomRequest extends Request {
+    user?: IUserDocument;
+}
 
 const getSecret = () => {
     const secret = process.env.JWT_SECRET;
@@ -55,5 +60,27 @@ export const login = async (req: Request, res: Response) => {
     } catch (err: any) {
         console.error('Login error:', err);
         res.status(500).json({ message: err.message || 'Server error' });
+    }
+};
+
+export const updateInterests = async (req: CustomRequest, res: Response) => {
+    try {
+        const { interests } = req.body;
+        if (!Array.isArray(interests)) {
+            return res.status(400).json({ message: 'Interests must be an array' });
+        }
+
+        const user = await User.findById(req.user?._id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.interests = interests;
+        await user.save();
+
+        res.status(200).json({ message: 'Interests updated', interests: user.interests });
+    } catch (err: any) {
+        console.error('Update interests error:', err);
+        res.status(500).json({ message: 'Server error' });
     }
 };

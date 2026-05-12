@@ -11,8 +11,12 @@ declare global {
     }
 }
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
-console.log('RUNTIME JWT_SECRET:', JWT_SECRET);
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+    console.error('FATAL ERROR: JWT_SECRET is not defined in environment variables.');
+    process.exit(1);
+}
 
 export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
     let token;

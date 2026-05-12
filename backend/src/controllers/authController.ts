@@ -28,18 +28,29 @@ export const register = async (req: Request, res: Response) => {
         res.status(500).json({ message: err.message || 'Server error' });
     }
 };
-
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
+        console.log('LOGIN ATTEMPT:', email);
+
         const user = await User.findOne({ email });
-        
-        // Use the comparePassword method defined in the model
-        if (!user || !(await (user as any).comparePassword(password))) {
+        if (!user) {
+            console.log('LOGIN FAILED: User not found');
             return res.status(401).json({ message: 'Invalid credentials' });
         }
-        
-        const token = jwt.sign({ userId: user._id }, getSecret(), { expiresIn: '1h' });
+
+        console.log('USER FOUND, HASH:', (user as any).password);
+        const isMatch = await (user as any).comparePassword(password);
+        console.log('PASSWORD MATCH:', isMatch);
+
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        const secret = process.env.JWT_SECRET;
+        if (!secret) throw new Error('JWT_SECRET is not defined');
+
+        const token = jwt.sign({ userId: user._id }, secret, { expiresIn: '1h' });
         res.json({ token, user: { email: user.email, role: user.role } });
     } catch (err: any) {
         console.error('Login error:', err);

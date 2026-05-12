@@ -23,7 +23,7 @@ const Sidebar = ({ isOpen, toggle }) => {
     ];
 
     return (
-        <aside className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 flex-shrink-0 z-50 w-[260px] h-screen bg-white border-r border-slate-200 flex flex-col transition-transform duration-300`}>
+        <aside className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:relative z-50 w-64 h-full bg-white border-r border-slate-200 flex flex-col transition-transform duration-300`}>
             <div className="p-6 font-bold text-xl text-indigo-700 tracking-tight flex justify-between items-center">
                 SecureNotes
                 <button onClick={toggle} className="lg:hidden p-2 text-slate-500"><X size={20} /></button>

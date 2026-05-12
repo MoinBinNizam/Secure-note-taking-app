@@ -28,19 +28,20 @@ const Settings = () => {
         };
         fetchProfile();
     }, []);
-
-    const handleAddInterest = (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            const newInterest = interest.trim();
-            if (newInterest && !interestsRef.current.includes(newInterest)) {
-                const updated = [...interestsRef.current, newInterest];
-                setInterests(updated);
-                interestsRef.current = updated;
-                setInterest('');
-            }
+const handleAddInterest = (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        const newInterest = interest.trim();
+        console.log('DEBUG - Adding interest:', newInterest);
+        if (newInterest && !interestsRef.current.includes(newInterest)) {
+            const updated = [...interestsRef.current, newInterest];
+            setInterests(updated);
+            interestsRef.current = updated;
+            setInterest('');
+            console.log('DEBUG - Updated Interests Ref:', updated);
         }
-    };
+    }
+};
 
     const removeInterest = (tag) => {
         const updated = interests.filter(i => i !== tag);

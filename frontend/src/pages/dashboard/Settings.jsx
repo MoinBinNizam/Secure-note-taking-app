@@ -26,8 +26,10 @@ const Settings = () => {
             e.preventDefault();
             const newInterest = interest.trim();
             if (newInterest && !interests.includes(newInterest)) {
-                setInterests((prev) => [...prev, newInterest]);
+                const updatedInterests = [...interests, newInterest];
+                setInterests(updatedInterests);
                 setInterest('');
+                console.log('DEBUG - New Interests state:', updatedInterests);
             }
         }
     };

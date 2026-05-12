@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, ShieldCheck, Database, LogOut, Menu, X, FileText, Settings } from 'lucide-react';
+import { LayoutDashboard, ShieldCheck, Database, LogOut, Menu, X, FileText, Settings, Tag } from 'lucide-react';
 import { jwtDecode } from 'jwt-decode';
 
 const Sidebar = ({ isOpen, toggle }) => {
@@ -15,6 +15,7 @@ const Sidebar = ({ isOpen, toggle }) => {
     const links = [
         { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
         { path: '/dashboard/notes', label: 'Notes', icon: FileText },
+        { path: '/dashboard/interests', label: 'Interests', icon: Tag },
         { path: '/dashboard/settings', label: 'Settings', icon: Settings },
         ...(isAdmin ? [
             { path: '/admin', label: 'Admin', icon: ShieldCheck },

@@ -7,6 +7,7 @@ import Signup from './pages/auth/Signup';
 import Dashboard from './pages/dashboard/Dashboard';
 import UserNotes from './pages/dashboard/UserNotes';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminUserNotes from './pages/admin/AdminUserNotes';
 import AggregationView from './pages/aggregations/AggregationView';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
         <Route path="/dashboard/notes" element={<Layout><UserNotes /></Layout>} />
         <Route path="/admin" element={<Layout><AdminDashboard /></Layout>} />
+        <Route path="/admin/user-notes/:userId" element={<Layout><AdminUserNotes /></Layout>} />
         <Route path="/aggregations" element={<Layout><AggregationView /></Layout>} />
       </Routes>
     </Router>

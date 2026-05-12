@@ -7,15 +7,23 @@ const Settings = () => {
     const [interests, setInterests] = useState([]);
     const [interest, setInterest] = useState('');
     const [loading, setLoading] = useState(false);
+    const interestsRef = useRef([]);
+
+    useEffect(() => {
+        interestsRef.current = interests;
+    }, [interests]);
 
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                // Fetch user profile to get initial interests
-                const res = await api.get('/auth/me'); // Assuming an endpoint exists
-                setInterests(res.data.interests || []);
+                const res = await api.get('/auth/me');
+                const initialInterests = res.data.interests || [];
+                setInterests(initialInterests);
+                interestsRef.current = initialInterests;
             } catch (err) {
                 console.error('Failed to fetch profile:', err);
+            } finally {
+                setLoading(false);
             }
         };
         fetchProfile();
@@ -25,24 +33,26 @@ const Settings = () => {
         if (e.key === 'Enter') {
             e.preventDefault();
             const newInterest = interest.trim();
-            if (newInterest && !interests.includes(newInterest)) {
-                const updatedInterests = [...interests, newInterest];
-                setInterests(updatedInterests);
+            if (newInterest && !interestsRef.current.includes(newInterest)) {
+                const updated = [...interestsRef.current, newInterest];
+                setInterests(updated);
+                interestsRef.current = updated;
                 setInterest('');
-                console.log('DEBUG - New Interests state:', updatedInterests);
             }
         }
     };
 
     const removeInterest = (tag) => {
-        setInterests(interests.filter(i => i !== tag));
+        const updated = interests.filter(i => i !== tag);
+        setInterests(updated);
+        interestsRef.current = updated;
     };
 
     const saveInterests = async () => {
-        console.log('DEBUG - Interests state at click:', interests);
+        console.log('DEBUG - Interests state at click (Ref):', interestsRef.current);
         try {
             setLoading(true);
-            await api.patch('/auth/interests', { interests });
+            await api.patch('/auth/interests', { interests: interestsRef.current });
             alert('Interests updated!');
         } catch (err) {
             console.error('Failed to save interests:', err);

@@ -49,27 +49,23 @@ const Login = () => {
                         
                         <div className="flex flex-col gap-1.5">
                             <label className="text-sm font-semibold text-slate-700">Email Address</label>
-                            <div className="relative group">
-                                {/* <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-700 transition-colors" size={22} /> */}
-                                <input className="decoration w-full pl-14 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" type="email" required />
-                            </div>
+                            <input className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" type="email" required />
                         </div>
 
                         <div className="flex flex-col gap-1.5">
                             <div className="flex justify-between items-center px-1">
                                 <label className="text-sm font-semibold text-slate-700">Password</label>
-                                <a href="#" className="text-xs font-bold text-indigo-700 hover:underline">Forgot?</a>
+                                <Link to="/forgot-password" className="text-xs font-bold text-indigo-700 hover:underline">Forgot?</Link>
                             </div>
                             <div className="relative group">
-                                {/* <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-700 transition-colors" size={22} /> */}
-                                <input className="decoration w-full pl-14 pr-14 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••••••" type={showPassword ? 'text' : 'password'} required />
+                                <input className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••••••" type={showPassword ? 'text' : 'password'} required />
                                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-indigo-700">
-                                    {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
+                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                 </button>
                             </div>
                         </div>
 
-                        <button type="submit" className="submit w-full bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all flex items-center justify-center gap-4text-base">
+                        <button type="submit" className="w-full bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all flex items-center justify-center gap-2 text-base">
                             Sign In <ArrowRight size={20} />
                         </button>
                     </form>

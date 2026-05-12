@@ -36,18 +36,14 @@ export const register = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
-        console.log('LOGIN ATTEMPT:', email);
 
         const user = await User.findOne({ email });
         if (!user) {
-            console.log('LOGIN FAILED: User not found');
             return res.status(401).json({ message: 'Invalid credentials' });
         }
-
-        console.log('USER FOUND, HASH:', (user as any).password);
+        
         const isMatch = await (user as any).comparePassword(password);
-        console.log('PASSWORD MATCH:', isMatch);
-
+        
         if (!isMatch) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }

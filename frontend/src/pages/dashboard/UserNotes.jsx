@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, MoreVertical, Edit, Trash2, ChevronLeft, ChevronRight, X, Bold, Italic, Underline, List, ListOrdered } from 'lucide-react';
+import { Plus, MoreVertical, Edit, Trash2, ChevronLeft, ChevronRight, X, Bold, Italic, Underline, List, ListOrdered, ArrowLeft } from 'lucide-react';
 import api from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const UserNotes = () => {
+  const navigate = useNavigate();
   const [notes, setNotes] = useState([]);
   const [pagination, setPagination] = useState({ currentPage: 1, totalPages: 1 });
   const [loading, setLoading] = useState(true);
@@ -67,7 +69,12 @@ const UserNotes = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
       <div className="sticky top-0 z-40 bg-slate-50 py-6 flex justify-between items-center mb-4">
-        <h2 className="text-3xl font-bold text-slate-800">My Notes</h2>
+        <div className="flex items-center gap-4">
+            <button onClick={() => navigate('/dashboard')} className="p-2 text-slate-500 hover:text-slate-800 transition-colors">
+                <ArrowLeft size={24} />
+            </button>
+            <h2 className="text-3xl font-bold text-slate-800">My Notes</h2>
+        </div>
         <button onClick={() => setModal({ isOpen: true, note: null })} className="flex items-center gap-2 bg-indigo-700 text-white px-5 py-2.5 rounded-2xl font-bold hover:bg-indigo-800 transition-all shadow-md">
           <Plus size={20} /> New Note
         </button>
@@ -107,30 +114,31 @@ const UserNotes = () => {
         {modal.isOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
             <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-white p-8 rounded-3xl w-full max-w-4xl shadow-xl">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-bold text-slate-800">{modal.note ? 'Edit Note' : 'Create New Note'}</h3>
-              <button type="button" onClick={() => setModal({ isOpen: false, note: null })}><X size={20} /></button>
-            </div>
-            <div className="space-y-4">
-              <input required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Note Title" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} />
-
-              <div className="border border-slate-200 rounded-2xl overflow-hidden min-h-[300px] flex flex-col">
-                  <div className="flex bg-slate-100 p-2 gap-1 border-b border-slate-200">
-                      <button type="button" onClick={() => formatText('bold')} className="p-2 hover:bg-slate-200 rounded"><Bold size={18} /></button>
-                      <button type="button" onClick={() => formatText('italic')} className="p-2 hover:bg-slate-200 rounded"><Italic size={18} /></button>
-                      <button type="button" onClick={() => formatText('underline')} className="p-2 hover:bg-slate-200 rounded"><Underline size={18} /></button>
-                      <button type="button" onClick={() => formatText('insertUnorderedList')} className="p-2 hover:bg-slate-200 rounded"><List size={18} /></button>
-                      <button type="button" onClick={() => formatText('insertOrderedList')} className="p-2 hover:bg-slate-200 rounded"><ListOrdered size={18} /></button>
-                  </div>
-                  <div 
-                      ref={contentRef} 
-                      contentEditable 
-                      className="w-full px-4 py-4 bg-slate-50 flex-grow h-[200px] outline-none overflow-y-auto cursor-text border border-transparent focus:border-indigo-300"
-                  />
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl font-bold text-slate-800">{modal.note ? 'Edit Note' : 'Create New Note'}</h3>
+                <button type="button" onClick={() => setModal({ isOpen: false, note: null })}><X size={20} /></button>
               </div>
-            </div>
-            <button onClick={handleSubmit} className="w-full mt-6 bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all">Save Note</button>
-            </motion.div>          </motion.div>
+              <div className="space-y-4">
+                <input required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl" placeholder="Note Title" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} />
+                
+                <div className="border border-slate-200 rounded-2xl overflow-hidden min-h-[300px] flex flex-col">
+                    <div className="flex bg-slate-100 p-2 gap-1 border-b border-slate-200">
+                        <button type="button" onClick={() => formatText('bold')} className="p-2 hover:bg-slate-200 rounded"><Bold size={18} /></button>
+                        <button type="button" onClick={() => formatText('italic')} className="p-2 hover:bg-slate-200 rounded"><Italic size={18} /></button>
+                        <button type="button" onClick={() => formatText('underline')} className="p-2 hover:bg-slate-200 rounded"><Underline size={18} /></button>
+                        <button type="button" onClick={() => formatText('insertUnorderedList')} className="p-2 hover:bg-slate-200 rounded"><List size={18} /></button>
+                        <button type="button" onClick={() => formatText('insertOrderedList')} className="p-2 hover:bg-slate-200 rounded"><ListOrdered size={18} /></button>
+                    </div>
+                    <div 
+                        ref={contentRef} 
+                        contentEditable 
+                        className="w-full px-4 py-4 bg-slate-50 flex-grow h-[200px] outline-none overflow-y-auto cursor-text border border-transparent focus:border-indigo-300"
+                    />
+                </div>
+              </div>
+              <button onClick={handleSubmit} className="w-full mt-6 bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all">Save Note</button>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

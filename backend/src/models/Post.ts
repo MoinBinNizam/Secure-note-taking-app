@@ -29,6 +29,10 @@ const PostSchema = new Schema<IPost>({
     timestamps: true, // Adds createdAt and updatedAt fields
 });
 
+// Explicit Indexing
+// Index on authorId to support the $lookup stage in aggregation pipelines.
+PostSchema.index({ authorId: 1 });
+
 const Post = model<IPost>('Post', PostSchema);
 
 export default Post;

@@ -1,7 +1,7 @@
 import express from 'express';
 import { authenticate } from '../middleware/auth.js';
 import { roleCheck } from '../middleware/roleCheck.js';
-import { getAllUsers, deleteUser } from '../controllers/adminController.js';
+import { getAllUsers, deleteUser, updateUserRole } from '../controllers/adminController.js';
 
 const router = express.Router();
 
@@ -12,6 +12,7 @@ router.route('/users')
     .get(getAllUsers); // Get all users
 
 router.route('/users/:id')
-    .delete(deleteUser); // Delete user
+    .delete(deleteUser)
+    .put(updateUserRole); // Add update route
 
 export default router;

@@ -21,6 +21,11 @@ if (!process.env.JWT_SECRET) {
 
 const app = express();
 
+app.use((req, res, next) => {
+    console.log('REQ INCOMING:', req.method, req.url);
+    next();
+});
+
 // CORS Middleware with explicit configuration
 app.use(cors({
     origin: '*',

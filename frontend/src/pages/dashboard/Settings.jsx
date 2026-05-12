@@ -50,7 +50,6 @@ const handleAddInterest = (e) => {
     };
 
     const saveInterests = async () => {
-        console.log('DEBUG - Interests state at click (Ref):', interestsRef.current);
         try {
             setLoading(true);
             await api.patch('/auth/interests', { interests: interestsRef.current });

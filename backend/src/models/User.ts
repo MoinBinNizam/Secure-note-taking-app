@@ -59,7 +59,7 @@ const UserSchema = new Schema<IUserDocument, IUserModel>({
 });
 
 // Explicit Indexing
-UserSchema.index({ interests: 1 }); // Multikey index for interests (Mongoose handles multikey for array fields automatically)
+// Removed unnecessary index on interests to comply with efficiency constraints.
 
 // Pre-save hook to hash password
 UserSchema.pre<IUserDocument>('save', async function () {

@@ -7,7 +7,7 @@ node_modules/
 .env.*.local
 
 # External Assets
-external/
+externals/
 
 # Build/Logs/System
 dist/

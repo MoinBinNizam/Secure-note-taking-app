@@ -77,7 +77,10 @@ const Signup = () => {
                         <div className="flex flex-col gap-1.5">
                             <label className="text-sm font-semibold text-slate-700 ml-1">Password</label>
                             <div className="relative group">
-                                <input className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} placeholder="••••••••••••" type={showPassword ? 'text' : 'password'} required />
+                                <input className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl 
+                                outline-none focus:ring-2 focus:ring-indigo-700/20 focus:border-indigo-700 transition-all text-base" 
+                                value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} 
+                                placeholder="••••••••••••" type={showPassword ? 'text' : 'password'} required />
                                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-indigo-700">
                                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                 </button>

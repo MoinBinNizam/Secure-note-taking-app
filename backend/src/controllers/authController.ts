@@ -75,17 +75,22 @@ export const getMe = async (req: CustomRequest, res: Response) => {
 export const updateInterests = async (req: CustomRequest, res: Response) => {
     try {
         const { interests } = req.body;
+        console.log('DEBUG - Interests received:', interests);
+        console.log('DEBUG - Authenticated user:', req.user?._id);
+
         if (!Array.isArray(interests)) {
             return res.status(400).json({ message: 'Interests must be an array' });
         }
 
         const user = await User.findById(req.user?._id);
         if (!user) {
+            console.log('DEBUG - User not found in DB');
             return res.status(404).json({ message: 'User not found' });
         }
 
         user.interests = interests;
         await user.save();
+        console.log('DEBUG - Interests saved successfully:', user.interests);
 
         res.status(200).json({ message: 'Interests updated', interests: user.interests });
     } catch (err: any) {

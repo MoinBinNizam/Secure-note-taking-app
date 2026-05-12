@@ -19,6 +19,7 @@ interface CustomRequest extends Request {
 export const register = async (req: Request, res: Response) => {
     try {
         const { email, password, interests } = req.body;
+        console.log('DEBUG - Registration request interests:', interests);
         
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -26,6 +27,7 @@ export const register = async (req: Request, res: Response) => {
         }
 
         const user = await User.create({ email, password, interests });
+        console.log('DEBUG - User registered with interests:', user.interests);
         
         const token = jwt.sign({ userId: user._id.toString() }, SHARED_JWT_SECRET, { expiresIn: '1h' });
 

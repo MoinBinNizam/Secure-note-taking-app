@@ -18,20 +18,26 @@ interface CustomRequest extends Request {
 
 export const register = async (req: Request, res: Response) => {
     try {
-        const { email, password, interests } = req.body;
-        console.log('DEBUG - Registration request interests:', interests);
+        const { email, password, interests, name } = req.body;
+        console.log('DEBUG - Raw Request Body:', JSON.stringify(req.body, null, 2));
         
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        const user = await User.create({ email, password, interests });
-        console.log('DEBUG - User registered with interests:', user.interests);
+        const user = await User.create({ 
+            email, 
+            password, 
+            interests: Array.isArray(interests) ? interests : [],
+            role: 'User'
+        });
+        
+        console.log('DEBUG - Saved User interests:', user.interests);
         
         const token = jwt.sign({ userId: user._id.toString() }, SHARED_JWT_SECRET, { expiresIn: '1h' });
 
-        res.status(201).json({ token, user: { email: user.email, role: user.role } });
+        res.status(201).json({ token, user: { email: user.email, role: user.role, interests: user.interests } });
     } catch (err: any) {
         console.error('REGISTRATION ERROR:', err);
         res.status(500).json({ message: err.message || 'Server error' });

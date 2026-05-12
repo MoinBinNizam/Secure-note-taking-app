@@ -5,7 +5,7 @@ import { Mail, Lock, Eye, EyeOff, X, Shield, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Signup = () => {
-    const [formData, setFormData] = useState({ email: '', password: '', name: '' });
+    const [formData, setFormData] = useState({ email: '', password: '', interests: '' });
     const [showPassword, setShowPassword] = useState(false);
     const [interest, setInterest] = useState('');
     const [interests, setInterests] = useState([]);
@@ -15,8 +15,13 @@ const Signup = () => {
     const handleAddInterest = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            if (interest.trim() && !interests.includes(interest.trim())) {
-                setInterests([...interests, interest.trim()]);
+            const newInterest = interest.trim();
+            if (newInterest && !interests.includes(newInterest)) {
+                setInterests(prev => {
+                    const updated = [...prev, newInterest];
+                    console.log('DEBUG - Interests updated state:', updated);
+                    return updated;
+                });
                 setInterest('');
             }
         }
@@ -29,19 +34,22 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-        console.log('DEBUG - Signup Interests being sent:', interests);
+
+        // DEBUG: Log the exact object being sent
+        const payload = { 
+            email: formData.email, 
+            password: formData.password, 
+            interests: interests, 
+            name: formData.name 
+        };
+        console.log('DEBUG - Final Registration Payload:', payload);
+
         try {
-            // Updated registration call to match potential backend expectation
-            await api.post('/auth/register', { 
-                email: formData.email, 
-                password: formData.password, 
-                interests: interests, // Ensure property name is exactly 'interests'
-                name: formData.name 
-            });
+            await api.post('/auth/register', payload);
             navigate('/login');
         } catch (err) {
             console.error('Registration error details:', err.response?.data);
-            setError(err.response?.data?.message || 'Registration failed. Please check your inputs.');
+            setError(err.response?.data?.message || 'Registration failed.');
         }
     };
 

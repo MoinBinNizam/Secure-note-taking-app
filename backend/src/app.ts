@@ -21,11 +21,16 @@ if (!process.env.JWT_SECRET) {
 
 const app = express();
 
+// CORS Middleware with explicit configuration
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+    credentials: true,
+    optionsSuccessStatus: 200
 }));
+
+app.options('*', cors()); // Preflight request handling
 app.use(express.json());
 
 app.get('/', (req, res) => {

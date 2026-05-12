@@ -20,7 +20,6 @@ const UserNotes = () => {
     try {
       setLoading(true);
       const res = await api.get(`/notes?page=${page}&limit=6`);
-      console.log('API RESPONSE (Notes):', res.data);
       setNotes(res.data.data || []);
       setPagination({ currentPage: res.data.currentPage, totalPages: res.data.totalPages });
     } catch (err) {
@@ -37,6 +36,7 @@ const UserNotes = () => {
   useEffect(() => {
     if (modal.isOpen && contentRef.current) {
         contentRef.current.innerHTML = modal.note ? modal.note.content : '';
+        setTimeout(() => contentRef.current?.focus(), 100);
     }
   }, [modal.isOpen, modal.note]);
 
@@ -122,7 +122,11 @@ const UserNotes = () => {
                         <button type="button" onClick={() => formatText('insertUnorderedList')} className="p-1 hover:bg-slate-200 rounded"><List size={16} /></button>
                         <button type="button" onClick={() => formatText('insertOrderedList')} className="p-1 hover:bg-slate-200 rounded"><ListOrdered size={16} /></button>
                     </div>
-                    <div ref={contentRef} contentEditable onInput={(e) => setFormData(prev => ({...prev, content: e.currentTarget.innerHTML}))} className="w-full px-4 py-3 bg-slate-50 h-48 outline-none overflow-y-auto" dangerouslySetInnerHTML={{ __html: modal.note?.content || '' }} />
+                    <div 
+                        ref={contentRef} 
+                        contentEditable 
+                        className="w-full px-4 py-3 bg-slate-50 h-48 outline-none overflow-y-auto cursor-text border border-transparent focus:border-indigo-300"
+                    />
                 </div>
               </div>
               <button onClick={handleSubmit} className="w-full mt-6 bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all">Save Note</button>

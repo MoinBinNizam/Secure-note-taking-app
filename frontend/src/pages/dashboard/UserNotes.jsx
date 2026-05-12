@@ -70,8 +70,8 @@ const UserNotes = () => {
         {notes.map((note) => (
           <motion.div key={note._id} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 group">
             <h3 className="font-bold text-slate-800 text-lg mb-2">{note.title}</h3>
-            <div className="text-slate-600 text-sm mb-6 h-12 overflow-hidden" dangerouslySetInnerHTML={{ __html: note.content }} />
-            <div className="flex justify-between items-center text-xs text-slate-400">
+            <div className="text-slate-600 text-sm mb-6 prose max-w-none" dangerouslySetInnerHTML={{ __html: note.content }} />
+            <div className="flex justify-between items-center text-xs text-slate-400 mt-auto">
               <span>{new Date(note.createdAt).toLocaleDateString()}</span>
               <div className="flex gap-2">
                 <button onClick={() => { setModal({ isOpen: true, note }); setFormData({ title: note.title, content: note.content }); }} className="hover:text-indigo-600"><Edit size={16} /></button>
@@ -101,13 +101,13 @@ const UserNotes = () => {
                         <button type="button" onClick={() => formatText('insertUnorderedList')} className="p-1 hover:bg-slate-200 rounded"><List size={16} /></button>
                         <button type="button" onClick={() => formatText('insertOrderedList')} className="p-1 hover:bg-slate-200 rounded"><ListOrdered size={16} /></button>
                     </div>
-                    <div ref={contentRef} contentEditable className="w-full px-4 py-3 bg-slate-50 h-48 outline-none overflow-y-auto" dangerouslySetInnerHTML={{ __html: formData.content }} />
+                    <div ref={contentRef} contentEditable onInput={(e) => setFormData(prev => ({...prev, content: e.currentTarget.innerHTML}))} className="w-full px-4 py-3 bg-slate-50 h-48 outline-none overflow-y-auto" dangerouslySetInnerHTML={{ __html: modal.note?.content || '' }} />
                 </div>
               </div>
               <button onClick={handleSubmit} className="w-full mt-6 bg-indigo-700 text-white py-4 rounded-2xl font-bold hover:bg-indigo-800 transition-all">Save Note</button>
             </motion.div>
           </motion.div>
-        )}
+        ))}
       </AnimatePresence>
     </div>
   );

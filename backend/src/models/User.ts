@@ -41,6 +41,7 @@ const UserSchema = new Schema<IUserDocument, IUserModel>({
     },
     interests: {
         type: [String],
+        default: []
     },
 }, {
     timestamps: true,

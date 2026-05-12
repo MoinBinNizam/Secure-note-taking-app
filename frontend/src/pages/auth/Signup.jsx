@@ -35,12 +35,15 @@ const Signup = () => {
         e.preventDefault();
         setError(null);
 
-        // DEBUG: Log the exact object being sent
-        const payload = { 
-            email: formData.email, 
-            password: formData.password, 
-            interests: interests, 
-            name: formData.name 
+        const normalizedInterests = interest.trim()
+            ? [...interests, interest.trim()]
+            : interests;
+
+        const payload = {
+            email: formData.email,
+            password: formData.password,
+            interests: normalizedInterests,
+            name: formData.name
         };
         console.log('DEBUG - Final Registration Payload:', payload);
 

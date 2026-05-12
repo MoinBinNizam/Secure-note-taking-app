@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Trash2 } from 'lucide-react';
+import { Trash2, FileText } from 'lucide-react';
 import api from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchUsers = async () => {
     try {
@@ -56,7 +58,8 @@ const AdminDashboard = () => {
                     </span>
                     </td>
                     <td className="p-4 text-slate-600">{user.interests ? user.interests.length : 0}</td>
-                    <td className="p-4">
+                    <td className="p-4 flex gap-3">
+                        <button onClick={() => navigate(`/admin/user-notes/${user._id}`)} className="text-indigo-600 hover:text-indigo-800"><FileText size={18} /></button>
                         <button onClick={() => deleteUser(user._id)} className="text-red-600 hover:text-red-800"><Trash2 size={18} /></button>
                     </td>
                 </tr>
